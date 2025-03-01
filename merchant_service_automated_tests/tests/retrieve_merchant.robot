@@ -11,15 +11,18 @@ Resource    ../resources/merchant_service_automated_test.robot
 *** Test Cases ***
 Test case 01: Retrieve Existing Merchant Successfully
     [Documentation]    Verify that retrieving an existing merchant returns a 200 response with correct details.
-    Given I have existing valid merchant id with expected status 200
+    Given I have a valid merchant payload
     And I use an valid access token
+    And I send a POST request to create a merchant with expected status 201
     When I send a GET request to retrieve merchant details with expected status 200
     Then the response status code should be 200
-    And The get response should contain the merchant details
+    And The response should contain the merchant details
 
 Test case 02: Get Merchant Details With Invalid Access Token
     [Documentation]    Verify that requesting merchant details with an invalid access token returns 401 Unauthorized.
-    Given I have existing valid merchant id with expected status 200
+    Given I have a valid merchant payload
+    And I use an valid access token
+    And I send a POST request to create a merchant with expected status 201
     And I use an invalid access token
     When I send a GET request to retrieve merchant details with expected status 401
     Then the response status code should be 401

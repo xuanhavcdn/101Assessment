@@ -53,6 +53,10 @@ I send a POST request to create a merchant with expected status ${status}
     Create Session    host    ${host}
     ${response}=    POST On Session    host    ${merchantsPath}    headers=${HEADERS}    json=${PAYLOAD}    expected_status=${status}
     Set Test Variable    ${RESPONSE}    ${response}
+    ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
+    ${merchantList}=    Get Value From Json    ${response_json}    $.data.merchantId
+    Run Keyword If    ${status} == 201
+    ...    Set Test Variable    ${MERCHANT_ID}    ${merchantList}[0]
 
 The response status code should be ${status}
     Should Be Equal As Numbers    ${RESPONSE.status_code}    ${status}
@@ -112,3 +116,4 @@ I have invalid merchant id
 The get response should contain the merchant details
     ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
     Dictionary Should Contain Key    ${response_json["data"]}    merchantId
+
