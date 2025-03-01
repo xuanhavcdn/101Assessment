@@ -92,19 +92,23 @@ I send a GET request to retrieve merchant details with expected status ${status}
     ${response}=    GET On Session    host    ${merchantsPath}/${MERCHANT_ID}    headers=${HEADERS}    expected_status=${status}
     Set Test Variable    ${RESPONSE}    ${response}
 
-I have existing valid merchant id with expected status ${status}
-    ${ACCESS_TOKEN}=    Get Token Using Refresh Token
+I send a GET request to retrieve all merchants expected status ${status} using ${paramKey}: ${paramValue}
+    ${params}=    Create Dictionary    ${paramKey}=${paramValue}
     ${HEADERS}=    Create Dictionary    Content-Type=application/json    Authorization=${ACCESS_TOKEN}
     Create Session    host    ${host}
-    ${response}=    GET On Session    host    ${merchantsPath}    headers=${HEADERS}    expected_status=${status}
-    # Convert response text to JSON
-    ${json_response}    Convert String To JSON    ${response.text}
-    # Extract the first element from "data" list
-    ${merchant_data}    Get From List    ${json_response["data"]}    0
-    # Get the "merchantId" from the extracted dictionary
-    ${MERCHANT_ID}    Get From Dictionary    ${merchant_data}    merchantId
-    # Set it as a test variable for future use
-    Set Test Variable    ${MERCHANT_ID}
+    ${response}=    GET On Session    host    ${merchantsPath}    headers=${HEADERS}    expected_status=${status}    params=${params}
+    Set Test Variable    ${RESPONSE}    ${response}
+    # Key invalid page number
+    ${incorrectPageMessage}=    Set Variable    The pageNumber (${paramValue}) is invalid. The pageNumber must be less than or equal to.
+    Set Test Variable    ${incorrectPageMessage}
+    # # Convert response text to JSON
+    # ${json_response}    Convert String To JSON    ${response.text}
+    # # Extract the first element from "data" list
+    # ${merchant_data}    Get From List    ${json_response["data"]}    0
+    # # Get the "merchantId" from the extracted dictionary
+    # ${MERCHANT_ID}    Get From Dictionary    ${merchant_data}    merchantId
+    # # Set it as a test variable for future use
+    # Set Test Variable    ${MERCHANT_ID}
 
 I have invalid merchant id
     ${MERCHANT_ID}=    Generate Random String
@@ -117,3 +121,15 @@ The get response should contain the merchant details
     ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
     Dictionary Should Contain Key    ${response_json["data"]}    merchantId
 
+The response should contain a list of merchants with pagination
+    ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
+    Dictionary Should Contain Key    ${response_json}    paging
+    Dictionary Should Contain Key    ${response_json["paging"]}    pageNumber
+    Dictionary Should Contain Key    ${response_json["paging"]}    pageSize
+    Dictionary Should Contain Key    ${response_json["paging"]}    totalRecords
+
+
+The response should contain merchants with given ${paramKey}: ${paramValue}
+    ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
+    ${actualParamValue}=    Get Value From Json    ${response_json}    $.data[0].${paramKey}
+    Should Contain    ${actualParamValue}    ${paramValue}
