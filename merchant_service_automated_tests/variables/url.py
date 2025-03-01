@@ -1,0 +1,1 @@
+stagingHost = 'https://api-101digital-sandbox.101digital.io/merchant-service/1.0.0'

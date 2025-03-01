@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.0.1 (Python 3.9.6 on darwin)" generated="2025-03-01T13:18:20.442016" rpa="false" schemaversion="5">
+<suite id="s1" name="Merchant Service Automated Test" source="/Volumes/Data/Test/101Assessment/merchant_service_automated_tests/resources/merchant_service_automated_test.robot">
+<test id="s1-t1" name="Get Token Using Refresh Token" line="10">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-01T13:18:20.499136" level="INFO">Creating Session using : alias=identity_service, url=https://reqres.in/api/users, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>identity_service</arg>
+<arg>${API_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-01T13:18:20.498968" elapsed="0.000278"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-03-01T13:18:20.694608" level="INFO">GET Request : url=https://reqres.in/api/users/ 
+ path_url=/api/users/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-03-01T13:18:20.694906" level="INFO">GET Response : url=https://reqres.in/api/users/ 
+ status=200, reason=OK 
+ headers={'Date': 'Sat, 01 Mar 2025 06:18:21 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1740803105&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=b9J9EEFLaNlQFiD30ObC5zZfnbxrA%2FpMaYzYPJu0VE0%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1740803105&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=b9J9EEFLaNlQFiD30ObC5zZfnbxrA%2FpMaYzYPJu0VE0%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"41e-bY3U72nulxuwNd/TmihMEHjLmek"', 'Via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'HIT', 'Age': '6796', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '91968959abc0f92a-SIN', 'Content-Encoding': 'gzip', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=41556&amp;min_rtt=39925&amp;rtt_var=8198&amp;sent=5&amp;recv=9&amp;lost=0&amp;retrans=0&amp;sent_bytes=2805&amp;recv_bytes=465&amp;delivery_rate=100988&amp;cwnd=253&amp;unsent_bytes=0&amp;cid=5f6f542774bcf96f&amp;ts=97&amp;x=0"'} 
+ body={"page":1,"per_page":6,"total":12,"total_pages":2,"data":[{"id":1,"email":"george.bluth@reqres.in","first_name":"George","last_name":"Bluth","avatar":"https://reqres.in/img/faces/1-image.jpg"},{"id":2,"email":"janet.weaver@reqres.in","first_name":"Janet","last_name":"Weaver","avatar":"https://reqres.in/img/faces/2-image.jpg"},{"id":3,"email":"emma.wong@reqres.in","first_name":"Emma","last_name":"Wong","avatar":"https://reqres.in/img/faces/3-image.jpg"},{"id":4,"email":"eve.holt@reqres.in","first_name":"Eve","last_name":"Holt","avatar":"https://reqres.in/img/faces/4-image.jpg"},{"id":5,"email":"charles.morris@reqres.in","first_name":"Charles","last_name":"Morris","avatar":"https://reqres.in/img/faces/5-image.jpg"},{"id":6,"email":"tracey.ramos@reqres.in","first_name":"Tracey","last_name":"Ramos","avatar":"https://reqres.in/img/faces/6-image.jpg"}],"support":{"url":"https://contentcaddy.io?utm_source=reqres&amp;utm_medium=json&amp;utm_campaign=referral","text":"Tired of writing endless social media content? Let Content Caddy generate it for you."}} 
+ </msg>
+<msg time="2025-03-01T13:18:20.695042" level="INFO">/Users/hacao/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py:1099: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-03-01T13:18:20.695277" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>identity_service</arg>
+<arg>/</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-01T13:18:20.499342" elapsed="0.195971"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Status Code: ${response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-01T13:18:20.695635" elapsed="0.000783"/>
+</kw>
+<kw name="Log To Console" owner="BuiltIn">
+<arg>Response Body: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" start="2025-03-01T13:18:20.696603" elapsed="0.000688"/>
+</kw>
+<status status="PASS" start="2025-03-01T13:18:20.498002" elapsed="0.199541"/>
+</test>
+<status status="PASS" start="2025-03-01T13:18:20.442659" elapsed="0.255437"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Merchant Service Automated Test">Merchant Service Automated Test</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
