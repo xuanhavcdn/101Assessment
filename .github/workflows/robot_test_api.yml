@@ -21,11 +21,8 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install robotframework
-          pip install robotframework-requests
-          pip install robotframework-jsonlibrary
-          pip install robotframework-seleniumlibrary
-          pip install robotframework-excellibrary
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Run Robot Framework Tests
         run: |

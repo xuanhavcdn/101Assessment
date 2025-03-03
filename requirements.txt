@@ -1,5 +1,5 @@
-pip install robotframework
-pip install robotframework-requests
-pip install robotframework-jsonlibrary
-pip install robotframework-seleniumlibrary
-pip install robotframework-excellibrary
+robotframework
+robotframework-requests
+robotframework-jsonlibrary
+robotframework-seleniumlibrary
+robotframework-excellibrary
