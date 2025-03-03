@@ -25,7 +25,6 @@ jobs:
           pip install robotframework-requests
           pip install robotframework-jsonlibrary
           pip install robotframework-seleniumlibrary
-          pip install robotframework-jsonlibrary
           pip install robotframework-excellibrary
 
       - name: Run Robot Framework Tests
