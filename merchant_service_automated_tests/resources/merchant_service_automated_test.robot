@@ -41,7 +41,7 @@ I have a valid merchant payload
 I use an invalid access token
     Set Test Variable    ${ACCESS_TOKEN}    invalid_token
 
-I use an valid access token
+I use a valid access token
     ${token}=    Get Token Using Refresh Token
     Set Test Variable    ${ACCESS_TOKEN}    ${token}
 I have a merchant payload with missing base currency
@@ -58,6 +58,10 @@ I send a POST request to create a merchant with expected status ${status}
     Run Keyword If    ${status} == 201
     ...    Set Test Variable    ${MERCHANT_ID}    ${merchantList}[0]
 
+I have merchant id
+    ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
+    ${merchantList}=    Get Value From Json    ${response_json}    $.data.merchantId
+    Set Test Variable    ${MERCHANT_ID}    ${merchantList}[0]
 The response status code should be ${status}
     Should Be Equal As Numbers    ${RESPONSE.status_code}    ${status}
 
@@ -83,13 +87,6 @@ The response should contain the merchant details
     Should Be Equal    ${actualMcc}[0]    ${mcc}
     Should Be Equal    ${actualMccName}[0]    ${mccName}
     Should Be Equal    ${actualLoyaltyEligible}    ${loyaltyEligible}
-
-
-I send a GET request to retrieve merchant details with expected status ${status}
-    ${HEADERS}=    Create Dictionary    Content-Type=application/json    Authorization=${ACCESS_TOKEN}
-    Create Session    host    ${host}
-    ${response}=    GET On Session    host    ${merchantsPath}/${MERCHANT_ID}    headers=${HEADERS}    expected_status=${status}
-    Set Test Variable    ${RESPONSE}    ${response}
 
 I send a GET request to retrieve all merchants expected status ${status} using ${paramKey}: ${paramValue}
     ${params}=    Create Dictionary    ${paramKey}=${paramValue}

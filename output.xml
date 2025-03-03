@@ -1,47 +1,421 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.0.1 (Python 3.9.6 on darwin)" generated="2025-03-01T13:18:20.442016" rpa="false" schemaversion="5">
-<suite id="s1" name="Merchant Service Automated Test" source="/Volumes/Data/Test/101Assessment/merchant_service_automated_tests/resources/merchant_service_automated_test.robot">
-<test id="s1-t1" name="Get Token Using Refresh Token" line="10">
-<kw name="Create Session" owner="RequestsLibrary">
-<msg time="2025-03-01T13:18:20.499136" level="INFO">Creating Session using : alias=identity_service, url=https://reqres.in/api/users, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<arg>identity_service</arg>
-<arg>${API_URL}</arg>
-<doc>Create Session: create a HTTP session to a server</doc>
-<status status="PASS" start="2025-03-01T13:18:20.498968" elapsed="0.000278"/>
+<robot generator="Robot 7.2.2 (Python 3.11.6 on darwin)" generated="2025-03-03T21:39:58.665425" rpa="false" schemaversion="5">
+<suite id="s1" name="Retrieve Merchant Feature" source="/Volumes/Data/Test/101Assessment/merchant_service_automated_tests/tests/retrieve_merchant_feature.robot">
+<test id="s1-t1" name="Test case 02: Get Merchant Details With Invalid Access Token" line="21">
+<kw name="Given I have a valid merchant payload" owner="merchant_service_automated_test">
+<kw name="Read Excel Data" owner="common">
+<kw name="Open Excel Document" owner="ExcelLibrary">
+<arg>${file_path}</arg>
+<arg>doc_id=excel_doc</arg>
+<doc>Opens xlsx document file.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.863266" elapsed="0.004132"/>
 </kw>
-<kw name="GET On Session" owner="RequestsLibrary">
-<msg time="2025-03-01T13:18:20.694608" level="INFO">GET Request : url=https://reqres.in/api/users/ 
- path_url=/api/users/ 
- headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
- body=None 
+<kw name="Read Excel Row" owner="ExcelLibrary">
+<msg time="2025-03-03T21:39:58.867867" level="INFO">${data} = ['GBP', 'INVxxxxxx', 30, 1, '80-01-01', 'SHOPPING &amp; RETAIL', 'True', 'Retail', 'RETAIL', 'LOW', 'Retail category for consumer goods.']</msg>
+<var>${data}</var>
+<arg>${row}</arg>
+<arg>sheet_name=${sheet_name}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.867654" elapsed="0.001534"/>
+</kw>
+<kw name="Close Current Excel Document" owner="ExcelLibrary">
+<doc>Closes current document.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.869327" elapsed="0.000111"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-03-03T21:39:58.869493" elapsed="0.000057"/>
+</return>
+<msg time="2025-03-03T21:39:58.869642" level="INFO">${excel_data} = ['GBP', 'INVxxxxxx', 30, 1, '80-01-01', 'SHOPPING &amp; RETAIL', 'True', 'Retail', 'RETAIL', 'LOW', 'Retail category for consumer goods.']</msg>
+<var>${excel_data}</var>
+<arg>${excelFilePath}</arg>
+<arg>${createNewMerchantSheetName}</arg>
+<arg>2</arg>
+<status status="PASS" start="2025-03-03T21:39:58.862927" elapsed="0.006887"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.870340" level="INFO">${baseCurrency} = GBP</msg>
+<arg>${baseCurrency}</arg>
+<arg>${excel_data}[0]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.869908" elapsed="0.000498"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.870786" level="INFO">${invoicePrefix} = INVxxxxxx</msg>
+<arg>${invoicePrefix}</arg>
+<arg>${excel_data}[1]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.870488" elapsed="0.000350"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.871211" level="INFO">${dueAfter} = 30</msg>
+<arg>${dueAfter}</arg>
+<arg>${excel_data}[2]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.870912" elapsed="0.000460"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.871728" level="INFO">${nextInvoiceNumber} = 1</msg>
+<arg>${nextInvoiceNumber}</arg>
+<arg>${excel_data}[3]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.871448" elapsed="0.000381"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.872321" level="INFO">${mcc} = 80-01-01</msg>
+<arg>${mcc}</arg>
+<arg>${excel_data}[4]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.871947" elapsed="0.000444"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.872960" level="INFO">${mccName} = SHOPPING &amp; RETAIL</msg>
+<arg>${mccName}</arg>
+<arg>${excel_data}[5]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.872528" elapsed="0.000498"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.873386" level="INFO">${loyaltyEligible} = True</msg>
+<arg>${loyaltyEligible}</arg>
+<arg>${excel_data}[6]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.873095" elapsed="0.000338"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.873747" level="INFO">&amp;{BODY} = { baseCurrency=GBP | invoicePrefix=INVxxxxxx | dueAfter=30 | nextInvoiceNumber=1 | mcc=80-01-01 | mccName=SHOPPING &amp; RETAIL | loyaltyEligible=True }</msg>
+<var>&amp;{BODY}</var>
+<arg>baseCurrency=${baseCurrency}</arg>
+<arg>invoicePrefix=${invoicePrefix}</arg>
+<arg>dueAfter=${dueAfter}</arg>
+<arg>nextInvoiceNumber=${nextInvoiceNumber}</arg>
+<arg>mcc=${mcc}</arg>
+<arg>mccName=${mccName}</arg>
+<arg>loyaltyEligible=${loyaltyEligible}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.873497" elapsed="0.000291"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.873997" level="INFO">&amp;{CATEGORY} = { categoryName=Retail | categoryCode=RETAIL | riskLevel=LOW | description=Retail category for consumer goods. }</msg>
+<var>&amp;{CATEGORY}</var>
+<arg>categoryName=${excel_data}[7]</arg>
+<arg>categoryCode=${excel_data}[8]</arg>
+<arg>riskLevel=${excel_data}[9]</arg>
+<arg>description=${excel_data}[10]</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.873852" elapsed="0.000181"/>
+</kw>
+<kw name="Set To Dictionary" owner="Collections">
+<arg>${BODY}</arg>
+<arg>category=${CATEGORY}</arg>
+<doc>Adds the given ``key_value_pairs`` and/or ``items`` to the ``dictionary``.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.874088" elapsed="0.000091"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.874520" level="INFO">${PAYLOAD} = {'baseCurrency': 'GBP', 'invoicePrefix': 'INVxxxxxx', 'dueAfter': 30, 'nextInvoiceNumber': 1, 'mcc': '80-01-01', 'mccName': 'SHOPPING &amp; RETAIL', 'loyaltyEligible': 'True', 'category': {'categoryName':...</msg>
+<arg>${PAYLOAD}</arg>
+<arg>${BODY}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.874233" elapsed="0.000335"/>
+</kw>
+<status status="PASS" start="2025-03-03T21:39:58.862737" elapsed="0.011881"/>
+</kw>
+<kw name="And I use a valid access token" owner="merchant_service_automated_test">
+<kw name="Get Token Using Refresh Token" owner="common">
+<kw name="Read Excel Data" owner="common">
+<kw name="Open Excel Document" owner="ExcelLibrary">
+<arg>${file_path}</arg>
+<arg>doc_id=excel_doc</arg>
+<doc>Opens xlsx document file.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.875274" elapsed="0.008155"/>
+</kw>
+<kw name="Read Excel Row" owner="ExcelLibrary">
+<msg time="2025-03-03T21:39:58.884813" level="INFO">${data} = ['767663206867-i67g665la5ct6ama7hveoddmitkhfjb3.apps.googleusercontent.com', 'https://admin-101digital-sandbox.101digital.io', 'refresh_token', '1//0ge8v4yb9jVxKCgYIARAAGBASNwF-L9IrkpjBv__ui9JF8AtmV3K...</msg>
+<var>${data}</var>
+<arg>${row}</arg>
+<arg>sheet_name=${sheet_name}</arg>
+<doc>Returns content of a row from the current sheet of the document.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.883844" elapsed="0.001266"/>
+</kw>
+<kw name="Close Current Excel Document" owner="ExcelLibrary">
+<doc>Closes current document.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.885346" elapsed="0.000566"/>
+</kw>
+<return>
+<value>${data}</value>
+<status status="PASS" start="2025-03-03T21:39:58.886113" elapsed="0.000155"/>
+</return>
+<msg time="2025-03-03T21:39:58.886500" level="INFO">${excel_data} = ['767663206867-i67g665la5ct6ama7hveoddmitkhfjb3.apps.googleusercontent.com', 'https://admin-101digital-sandbox.101digital.io', 'refresh_token', '1//0ge8v4yb9jVxKCgYIARAAGBASNwF-L9IrkpjBv__ui9JF8AtmV3K...</msg>
+<var>${excel_data}</var>
+<arg>${excelFilePath}</arg>
+<arg>${refreshTokenSheetName}</arg>
+<arg>2</arg>
+<status status="PASS" start="2025-03-03T21:39:58.875109" elapsed="0.011514"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.887448" level="INFO">${clientId} = 767663206867-i67g665la5ct6ama7hveoddmitkhfjb3.apps.googleusercontent.com</msg>
+<var>${clientId}</var>
+<arg>${excel_data}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.886884" elapsed="0.000729"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.888150" level="INFO">${redirectUri} = https://admin-101digital-sandbox.101digital.io</msg>
+<var>${redirectUri}</var>
+<arg>${excel_data}[1]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.887840" elapsed="0.000486"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.889522" level="INFO">${grantType} = refresh_token</msg>
+<var>${grantType}</var>
+<arg>${excel_data}[2]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.888512" elapsed="0.001223"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.890861" level="INFO">${refreshToken} = 1//0ge8v4yb9jVxKCgYIARAAGBASNwF-L9IrkpjBv__ui9JF8AtmV3K8Fjdd1jLtXISUkkoNB71ugwhkebBV2cbPXfQMKqzGf-woc9c</msg>
+<var>${refreshToken}</var>
+<arg>${excel_data}[3]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.890449" elapsed="0.000597"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-03T21:39:58.891861" level="INFO">&amp;{BODY} = { clientId=767663206867-i67g665la5ct6ama7hveoddmitkhfjb3.apps.googleusercontent.com | redirectUri=https://admin-101digital-sandbox.101digital.io | grantType=refresh_token | refreshToken=1//0ge8v4yb9jV...</msg>
+<var>&amp;{BODY}</var>
+<arg>clientId=${clientId}</arg>
+<arg>redirectUri=${redirectUri}</arg>
+<arg>grantType=${grantType}</arg>
+<arg>refreshToken=${refreshToken}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.891330" elapsed="0.000949"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-03T21:39:58.893166" level="INFO">Creating Session using : alias=identity_service, url=https://api-101digital-sandbox.101digital.io/identity-service/1.0.0/token, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>identity_service</arg>
+<arg>${apiTokenUrl}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-03T21:39:58.892767" elapsed="0.003985"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-03-03T21:39:59.264049" level="INFO">POST Request : url=https://api-101digital-sandbox.101digital.io/identity-service/1.0.0/token/ 
+ path_url=/identity-service/1.0.0/token/ 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': 'application/json', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '306'} 
+ body=b'{"clientId": "767663206867-i67g665la5ct6ama7hveoddmitkhfjb3.apps.googleusercontent.com", "redirectUri": "https://admin-101digital-sandbox.101digital.io", "grantType": "refresh_token", "refreshToken": "1//0ge8v4yb9jVxKCgYIARAAGBASNwF-L9IrkpjBv__ui9JF8AtmV3K8Fjdd1jLtXISUkkoNB71ugwhkebBV2cbPXfQMKqzGf-woc9c"}' 
  </msg>
-<msg time="2025-03-01T13:18:20.694906" level="INFO">GET Response : url=https://reqres.in/api/users/ 
+<msg time="2025-03-03T21:39:59.264434" level="INFO">POST Response : url=https://api-101digital-sandbox.101digital.io/identity-service/1.0.0/token/ 
  status=200, reason=OK 
- headers={'Date': 'Sat, 01 Mar 2025 06:18:21 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'Report-To': '{"group":"heroku-nel","max_age":3600,"endpoints":[{"url":"https://nel.heroku.com/reports?ts=1740803105&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=b9J9EEFLaNlQFiD30ObC5zZfnbxrA%2FpMaYzYPJu0VE0%3D"}]}', 'Reporting-Endpoints': 'heroku-nel=https://nel.heroku.com/reports?ts=1740803105&amp;sid=c4c9725f-1ab0-44d8-820f-430df2718e11&amp;s=b9J9EEFLaNlQFiD30ObC5zZfnbxrA%2FpMaYzYPJu0VE0%3D', 'Nel': '{"report_to":"heroku-nel","max_age":3600,"success_fraction":0.005,"failure_fraction":0.05,"response_headers":["Via"]}', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"41e-bY3U72nulxuwNd/TmihMEHjLmek"', 'Via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'HIT', 'Age': '6796', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '91968959abc0f92a-SIN', 'Content-Encoding': 'gzip', 'server-timing': 'cfL4;desc="?proto=TCP&amp;rtt=41556&amp;min_rtt=39925&amp;rtt_var=8198&amp;sent=5&amp;recv=9&amp;lost=0&amp;retrans=0&amp;sent_bytes=2805&amp;recv_bytes=465&amp;delivery_rate=100988&amp;cwnd=253&amp;unsent_bytes=0&amp;cid=5f6f542774bcf96f&amp;ts=97&amp;x=0"'} 
- body={"page":1,"per_page":6,"total":12,"total_pages":2,"data":[{"id":1,"email":"george.bluth@reqres.in","first_name":"George","last_name":"Bluth","avatar":"https://reqres.in/img/faces/1-image.jpg"},{"id":2,"email":"janet.weaver@reqres.in","first_name":"Janet","last_name":"Weaver","avatar":"https://reqres.in/img/faces/2-image.jpg"},{"id":3,"email":"emma.wong@reqres.in","first_name":"Emma","last_name":"Wong","avatar":"https://reqres.in/img/faces/3-image.jpg"},{"id":4,"email":"eve.holt@reqres.in","first_name":"Eve","last_name":"Holt","avatar":"https://reqres.in/img/faces/4-image.jpg"},{"id":5,"email":"charles.morris@reqres.in","first_name":"Charles","last_name":"Morris","avatar":"https://reqres.in/img/faces/5-image.jpg"},{"id":6,"email":"tracey.ramos@reqres.in","first_name":"Tracey","last_name":"Ramos","avatar":"https://reqres.in/img/faces/6-image.jpg"}],"support":{"url":"https://contentcaddy.io?utm_source=reqres&amp;utm_medium=json&amp;utm_campaign=referral","text":"Tired of writing endless social media content? Let Content Caddy generate it for you."}} 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '1371', 'Connection': 'keep-alive', 'Date': 'Mon, 03 Mar 2025 14:39:59 GMT', 'Access-Control-Allow-Credentials': 'true', 'x-amzn-RequestId': 'd63a96cf-2ae1-4b7d-8980-c250428fd9d7', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Strict-Transport-Security': 'max-age=31536000 ; includeSubDomains', 'X-Frame-Options': 'DENY', 'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,SOAPAction,Access-Control-Allow-Origin', 'x-event-trace-id': 'b0f36281-f305-434a-b318-b7a031fe5a31', 'x-amzn-Remapped-Connection': 'keep-alive', 'x-amz-apigw-id': 'G2rR5EHFSQ0EGug=', 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate', 'Expires': '0', 'X-Content-Type-Options': 'nosniff', 'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, PATCH, OPTIONS', 'X-Amzn-Trace-Id': 'Root=1-67c5bf3e-4e646deb3ab6a50d2214734d', 'Pragma': 'no-cache', 'Access-Control-Max-Age': '1728000', 'x-amzn-Remapped-Date': 'Mon, 03 Mar 2025 14:39:59 GMT', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 e767ca473e0856b4a7a5944d6a1bc0ac.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'SGN50-P2', 'X-Amz-Cf-Id': 'nh7uf5S54bYRSPlVVJtHKlfzutDb2vBj7gJo0Xg0WKxzEC7XNUqdtQ=='} 
+ body={"access_token":"ya29.a0AeXRPp6CNZUYr6DVFFtX-YlBtwbX2amB2KVWSUokOeBnboh3GhbTFsAhs0I5XR9Kxz2pccEWfDUUa0O-9XmqLE8Z7qkSe11MqgSBAh4bsZ0sUU1awaGn_AGMKvNU-W3mSd42Xrum6xnOu_EYBHFgOeDco2amPcp4nlL38gW1Nv0aCgYKAaISARISFQHGX2MijryCpqR4GbAvdZGhzTpN4g0178","scope":"https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile openid","id_token":"eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3Njc2NjMyMDY4NjctaTY3ZzY2NWxhNWN0NmFtYTdodmVvZGRtaXRraGZqYjMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI3Njc2NjMyMDY4NjctaTY3ZzY2NWxhNWN0NmFtYTdodmVvZGRtaXRraGZqYjMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTA5OTgwNTQxNzk3MjA4NzE1MjkiLCJoZCI6IjEwMWRpZ2l0YWwuaW8iLCJlbWFpbCI6InByYWJvZGhhLndpamVyYXRobmVAMTAxZGlnaXRhbC5pbyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiYnNqOG4tdVNvRHpoYUp4VHdZZ1BDZyIsImlhdCI6MTc0MTAxMjc5OSwiZXhwIjoxNzQxMDE2Mzk5fQ.JN1-HyMmVmi6Rf1yE4lPSbAm0GZkWWciJiD96PSKgQo0DEe1DygW2Pd8VB3BtpEibY7FSPYaonOZyhUFfjuVWGVNQpzXXhtrcq402ydSrveX8M_BQwoFxJZumd9rDRvta8gsc3Y6ulq9NAe_PZ8r4VceJf3fQgXXXVZzLdB2_gQScLgyXSJY7zaFgyhBd44SKxL_YPjMjIXQ15O-y26JdDHTFnpLgPbDKmYOmvKZxapa8P7lZ9sSLpo4U64dzhwwFrCHQ3p-pSb-X8vn0zJnXtRkbnVM2J6-nLpbvkSKeJ7jPgyoDgjg3TCkQi4cecx-EYVQXf6NfxnYEWYDxfgDnQ","token_type":"Bearer","expires_in":3599} 
  </msg>
-<msg time="2025-03-01T13:18:20.695042" level="INFO">/Users/hacao/Library/Python/3.9/lib/python/site-packages/urllib3/connectionpool.py:1099: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+<msg time="2025-03-03T21:39:59.264661" level="INFO">/Volumes/Data/Test/101Assessment/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-101digital-sandbox.101digital.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
   warnings.warn(</msg>
-<msg time="2025-03-01T13:18:20.695277" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<msg time="2025-03-03T21:39:59.264981" level="INFO">${response} = &lt;Response [200]&gt;</msg>
 <var>${response}</var>
 <arg>identity_service</arg>
 <arg>/</arg>
+<arg>headers=${headers}</arg>
+<arg>json=${BODY}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.897268" elapsed="0.367821"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-03-03T21:39:59.265971" level="INFO">${response_json} = {'access_token': 'ya29.a0AeXRPp6CNZUYr6DVFFtX-YlBtwbX2amB2KVWSUokOeBnboh3GhbTFsAhs0I5XR9Kxz2pccEWfDUUa0O-9XmqLE8Z7qkSe11MqgSBAh4bsZ0sUU1awaGn_AGMKvNU-W3mSd42Xrum6xnOu_EYBHFgOeDco2amPcp4nlL38gW1Nv0aCgY...</msg>
+<var>${response_json}</var>
+<arg>json.loads($response.content)</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-03-03T21:39:59.265385" elapsed="0.000700"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2025-03-03T21:39:59.296386" level="INFO">${id_token} = ['eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3Njc2NjMyMDY4NjctaTY3ZzY2NWxhNWN0NmF...</msg>
+<var>${id_token}</var>
+<arg>${response_json}</arg>
+<arg>$.id_token</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2025-03-03T21:39:59.266274" elapsed="0.030550"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:59.299858" level="INFO">${ACCESS_TOKEN} = eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3Njc2NjMyMDY4NjctaTY3ZzY2NWxhNWN0NmFtY...</msg>
+<arg>${ACCESS_TOKEN}</arg>
+<arg>${id_token}[0]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:59.298031" elapsed="0.002125"/>
+</kw>
+<return>
+<value>${ACCESS_TOKEN}</value>
+<status status="PASS" start="2025-03-03T21:39:59.300301" elapsed="0.000128"/>
+</return>
+<msg time="2025-03-03T21:39:59.300675" level="INFO">${token} = eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3Njc2NjMyMDY4NjctaTY3ZzY2NWxhNWN0NmFtY...</msg>
+<var>${token}</var>
+<status status="PASS" start="2025-03-03T21:39:58.874963" elapsed="0.425864"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:39:59.301532" level="INFO">${ACCESS_TOKEN} = eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3Njc2NjMyMDY4NjctaTY3ZzY2NWxhNWN0NmFtY...</msg>
+<arg>${ACCESS_TOKEN}</arg>
+<arg>${token}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:39:59.301183" elapsed="0.000458"/>
+</kw>
+<status status="PASS" start="2025-03-03T21:39:58.874771" elapsed="0.426970"/>
+</kw>
+<kw name="And I send a POST request to &quot;Create New Merchant&quot; with ${merchantsPath}, payload ${PAYLOAD} and expected status 201" owner="common" source_name="I send a POST request to ${functionName} with ${urlPath}, payload ${payload} and expected status ${status}">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-03T21:39:59.303548" level="INFO">${HEADERS} = {'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS...</msg>
+<var>${HEADERS}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${ACCESS_TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-03T21:39:59.303156" elapsed="0.000581"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-03T21:39:59.304832" level="INFO">Creating Session using : alias=host, url=https://api-neobank-dev.101digital.io/merchant-service/1.0.0, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>host</arg>
+<arg>${host}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-03T21:39:59.304232" elapsed="0.000906"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-03-03T21:40:00.187372" level="INFO">POST Request : url=https://api-neobank-dev.101digital.io/merchant-service/1.0.0/merchants 
+ path_url=/merchant-service/1.0.0/merchants 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'eyJhbGciOiJSUzI1NiIsImtpZCI6IjI1ZjgyMTE3MTM3ODhiNjE0NTQ3NGI1MDI5YjAxNDFiZDViM2RlOWMiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI3Njc2NjMyMDY4NjctaTY3ZzY2NWxhNWN0NmFtYTdodmVvZGRtaXRraGZqYjMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI3Njc2NjMyMDY4NjctaTY3ZzY2NWxhNWN0NmFtYTdodmVvZGRtaXRraGZqYjMuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTA5OTgwNTQxNzk3MjA4NzE1MjkiLCJoZCI6IjEwMWRpZ2l0YWwuaW8iLCJlbWFpbCI6InByYWJvZGhhLndpamVyYXRobmVAMTAxZGlnaXRhbC5pbyIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiYnNqOG4tdVNvRHpoYUp4VHdZZ1BDZyIsImlhdCI6MTc0MTAxMjc5OSwiZXhwIjoxNzQxMDE2Mzk5fQ.JN1-HyMmVmi6Rf1yE4lPSbAm0GZkWWciJiD96PSKgQo0DEe1DygW2Pd8VB3BtpEibY7FSPYaonOZyhUFfjuVWGVNQpzXXhtrcq402ydSrveX8M_BQwoFxJZumd9rDRvta8gsc3Y6ulq9NAe_PZ8r4VceJf3fQgXXXVZzLdB2_gQScLgyXSJY7zaFgyhBd44SKxL_YPjMjIXQ15O-y26JdDHTFnpLgPbDKmYOmvKZxapa8P7lZ9sSLpo4U64dzhwwFrCHQ3p-pSb-X8vn0zJnXtRkbnVM2J6-nLpbvkSKeJ7jPgyoDgjg3TCkQi4cecx-EYVQXf6NfxnYEWYDxfgDnQ', 'Content-Length': '311'} 
+ body=b'{"baseCurrency": "GBP", "invoicePrefix": "INVxxxxxx", "dueAfter": 30, "nextInvoiceNumber": 1, "mcc": "80-01-01", "mccName": "SHOPPING &amp; RETAIL", "loyaltyEligible": "True", "category": {"categoryName": "Retail", "categoryCode": "RETAIL", "riskLevel": "LOW", "description": "Retail category for consumer goods."}}' 
+ </msg>
+<msg time="2025-03-03T21:40:00.188196" level="INFO">POST Response : url=https://api-neobank-dev.101digital.io/merchant-service/1.0.0/merchants 
+ status=201, reason=Created 
+ headers={'Content-Type': 'application/json;charset=UTF-8', 'Content-Length': '235', 'Connection': 'keep-alive', 'Date': 'Mon, 03 Mar 2025 14:40:00 GMT', 'Access-Control-Allow-Credentials': 'true', 'x-amzn-RequestId': '168d6a1f-1d2a-412c-a07f-b63fcc79380b', 'X-XSS-Protection': '1; mode=block', 'Access-Control-Allow-Origin': '*', 'Strict-Transport-Security': 'max-age=31536000 ; includeSubDomains', 'X-Frame-Options': 'DENY', 'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,SOAPAction,Access-Control-Allow-Origin', 'x-event-trace-id': 'ece3807a-ab35-4513-b43c-c362b16b7797', 'x-amzn-Remapped-Connection': 'keep-alive', 'Set-Cookie': 'JSESSIONID=489347A9FC28577C6557AF5E10260822; Path=/; Secure; HttpOnly', 'x-amz-apigw-id': 'G2rR-HVdSQ0EbBw=', 'Cache-Control': 'no-cache, no-store, max-age=0, must-revalidate', 'Expires': '0', 'X-Content-Type-Options': 'nosniff', 'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE, PATCH, OPTIONS', 'X-Amzn-Trace-Id': 'Root=1-67c5bf3f-23d5248d72811e2e51db852b', 'Pragma': 'no-cache', 'Access-Control-Max-Age': '1728000', 'x-amzn-Remapped-Date': 'Mon, 03 Mar 2025 14:40:00 GMT', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 aee516a344a6d92f41f2a0dbc5df4276.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'SGN50-P2', 'X-Amz-Cf-Id': 'AXUpsMSAQrRPn0Mgxcia1uNP0Z3WVmidZz03c2XAa_-yVekludKTgg=='} 
+ body={"data":{"merchantId":"9fce79a4-5229-4203-9a5e-a080ae66710f","baseCurrency":"GBP","invoicePrefix":"INVxxxxxx","dueAfter":30,"nextInvoiceNumber":1,"mcc":"80-01-01","mccName":"SHOPPING &amp; RETAIL","linkAccounts":[],"loyaltyEligible":true}} 
+ </msg>
+<msg time="2025-03-03T21:40:00.188447" level="INFO">/Volumes/Data/Test/101Assessment/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-neobank-dev.101digital.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-03-03T21:40:00.188975" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>host</arg>
+<arg>${urlPath}</arg>
+<arg>headers=${HEADERS}</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=${status}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-03-03T21:39:59.305450" elapsed="0.884352"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:40:00.193108" level="INFO">${RESPONSE} = &lt;Response [201]&gt;</msg>
+<arg>${RESPONSE}</arg>
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:40:00.190733" elapsed="0.003604"/>
+</kw>
+<status status="PASS" start="2025-03-03T21:39:59.302413" elapsed="0.894321"/>
+</kw>
+<kw name="And I have merchant id" owner="merchant_service_automated_test">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-03-03T21:40:00.206022" level="INFO">${response_json} = {'data': {'merchantId': '9fce79a4-5229-4203-9a5e-a080ae66710f', 'baseCurrency': 'GBP', 'invoicePrefix': 'INVxxxxxx', 'dueAfter': 30, 'nextInvoiceNumber': 1, 'mcc': '80-01-01', 'mccName': 'SHOPPING &amp; R...</msg>
+<var>${response_json}</var>
+<arg>json.loads($RESPONSE.content)</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-03-03T21:40:00.204751" elapsed="0.001551"/>
+</kw>
+<kw name="Get Value From Json" owner="JSONLibrary">
+<msg time="2025-03-03T21:40:00.222789" level="INFO">${merchantList} = ['9fce79a4-5229-4203-9a5e-a080ae66710f']</msg>
+<var>${merchantList}</var>
+<arg>${response_json}</arg>
+<arg>$.data.merchantId</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<status status="PASS" start="2025-03-03T21:40:00.206546" elapsed="0.016371"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:40:00.223795" level="INFO">${MERCHANT_ID} = 9fce79a4-5229-4203-9a5e-a080ae66710f</msg>
+<arg>${MERCHANT_ID}</arg>
+<arg>${merchantList}[0]</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:40:00.223091" elapsed="0.000791"/>
+</kw>
+<status status="PASS" start="2025-03-03T21:40:00.202333" elapsed="0.021632"/>
+</kw>
+<kw name="And I use an invalid access token" owner="merchant_service_automated_test">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:40:00.224670" level="INFO">${ACCESS_TOKEN} = invalid_token</msg>
+<arg>${ACCESS_TOKEN}</arg>
+<arg>invalid_token</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:40:00.224534" elapsed="0.000210"/>
+</kw>
+<status status="PASS" start="2025-03-03T21:40:00.224242" elapsed="0.000569"/>
+</kw>
+<kw name="When I send a GET request to &quot;Retrieve Merchant&quot; with ${merchantsPath}/${MERCHANT_ID}, params '' and expected status 401" owner="common" source_name="I send a GET request to ${functionName} with ${urlPath}, params ${params} and expected status ${status}">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-03-03T21:40:00.226139" level="INFO">${HEADERS} = {'Content-Type': 'application/json', 'Authorization': 'invalid_token'}</msg>
+<var>${HEADERS}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Authorization=${ACCESS_TOKEN}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-03-03T21:40:00.225826" elapsed="0.000392"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-03-03T21:40:00.226459" level="INFO">Creating Session using : alias=host, url=https://api-neobank-dev.101digital.io/merchant-service/1.0.0, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>host</arg>
+<arg>${host}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-03-03T21:40:00.226333" elapsed="0.000285"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-03-03T21:40:00.410538" level="INFO">GET Request : url=https://api-neobank-dev.101digital.io/merchant-service/1.0.0/merchants/9fce79a4-5229-4203-9a5e-a080ae66710f?'' 
+ path_url=/merchant-service/1.0.0/merchants/9fce79a4-5229-4203-9a5e-a080ae66710f?'' 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate, br', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Authorization': 'invalid_token'} 
+ body=None 
+ </msg>
+<msg time="2025-03-03T21:40:00.411158" level="INFO">GET Response : url=https://api-neobank-dev.101digital.io/merchant-service/1.0.0/merchants/9fce79a4-5229-4203-9a5e-a080ae66710f?'' 
+ status=401, reason=Unauthorized 
+ headers={'Content-Type': 'application/json', 'Content-Length': '26', 'Connection': 'keep-alive', 'Date': 'Mon, 03 Mar 2025 14:40:00 GMT', 'X-Amzn-Trace-Id': 'Root=1-67c5bf40-2b66173357d7d34855c9ee80', 'x-amzn-RequestId': 'daa02bc6-1ffe-4a31-89a7-8e21b0f726e1', 'x-amzn-ErrorType': 'UnauthorizedException', 'x-amz-apigw-id': 'G2rSHFSPSQ0EMJg=', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 1bc8de8bbf8dddcece94f92462c307f4.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'SGN50-P2', 'X-Amz-Cf-Id': 'eYMgRxLAqHC_KCRvQr_i76zEHJloJZFJ9BuKe0Cdy6_AoGTDi7bYlQ=='} 
+ body={"message":"Unauthorized"} 
+ </msg>
+<msg time="2025-03-03T21:40:00.411471" level="INFO">/Volumes/Data/Test/101Assessment/.venv/lib/python3.11/site-packages/urllib3/connectionpool.py:1097: InsecureRequestWarning: Unverified HTTPS request is being made to host 'api-neobank-dev.101digital.io'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg time="2025-03-03T21:40:00.411971" level="INFO">${response} = &lt;Response [401]&gt;</msg>
+<var>${response}</var>
+<arg>host</arg>
+<arg>${urlPath}</arg>
+<arg>headers=${HEADERS}</arg>
+<arg>expected_status=${status}</arg>
+<arg>params=${params}</arg>
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
-<status status="PASS" start="2025-03-01T13:18:20.499342" elapsed="0.195971"/>
+<status status="PASS" start="2025-03-03T21:40:00.226714" elapsed="0.185428"/>
 </kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>Response Status Code: ${response.status_code}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-03-01T13:18:20.695635" elapsed="0.000783"/>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-03-03T21:40:00.413134" level="INFO">${RESPONSE} = &lt;Response [401]&gt;</msg>
+<arg>${RESPONSE}</arg>
+<arg>${response}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-03-03T21:40:00.412610" elapsed="0.000683"/>
 </kw>
-<kw name="Log To Console" owner="BuiltIn">
-<arg>Response Body: ${response.content}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" start="2025-03-01T13:18:20.696603" elapsed="0.000688"/>
+<status status="PASS" start="2025-03-03T21:40:00.225352" elapsed="0.188096"/>
 </kw>
-<status status="PASS" start="2025-03-01T13:18:20.498002" elapsed="0.199541"/>
+<kw name="Then the response status code should be 401" owner="merchant_service_automated_test" source_name="The response status code should be ${status}">
+<kw name="Should Be Equal As Numbers" owner="BuiltIn">
+<msg time="2025-03-03T21:40:00.416348" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${RESPONSE.status_code}</arg>
+<arg>${status}</arg>
+<doc>Fails if objects are unequal after converting them to real numbers.</doc>
+<status status="PASS" start="2025-03-03T21:40:00.415187" elapsed="0.001371"/>
+</kw>
+<status status="PASS" start="2025-03-03T21:40:00.414398" elapsed="0.002293"/>
+</kw>
+<kw name="And The response should contain &quot;Unauthorized&quot;" owner="merchant_service_automated_test" source_name="The response should contain &quot;${text}&quot;">
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${RESPONSE.content}</arg>
+<arg>${text}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-03-03T21:40:00.417815" elapsed="0.000668"/>
+</kw>
+<status status="PASS" start="2025-03-03T21:40:00.417147" elapsed="0.001450"/>
+</kw>
+<doc>Verify that requesting merchant details with an invalid access token returns 401 Unauthorized.</doc>
+<status status="PASS" start="2025-03-03T21:39:58.862319" elapsed="1.556718"/>
 </test>
-<status status="PASS" start="2025-03-01T13:18:20.442659" elapsed="0.255437"/>
+<status status="PASS" start="2025-03-03T21:39:58.668184" elapsed="1.752653"/>
 </suite>
 <statistics>
 <total>
@@ -50,7 +424,7 @@
 <tag>
 </tag>
 <suite>
-<stat pass="1" fail="0" skip="0" id="s1" name="Merchant Service Automated Test">Merchant Service Automated Test</stat>
+<stat name="Retrieve Merchant Feature" id="s1" pass="1" fail="0" skip="0">Retrieve Merchant Feature</stat>
 </suite>
 </statistics>
 <errors>

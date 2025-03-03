@@ -39,4 +39,25 @@ Get Token Using Refresh Token
 
     ${response_json}=    Evaluate    json.loads($response.content)    json
     ${id_token}=    Get Value From Json    ${response_json}    $.id_token
-    RETURN    ${id_token}[0]
+    Set Test Variable    ${ACCESS_TOKEN}    ${id_token}[0]
+    RETURN    ${ACCESS_TOKEN}
+
+# Common requests
+I send a GET request to ${functionName} with ${urlPath}, params ${params} and expected status ${status}
+    ${HEADERS}=    Create Dictionary    Content-Type=application/json    Authorization=${ACCESS_TOKEN}
+    Create Session    host    ${host}
+    ${response}=    GET On Session    host    ${urlPath}    headers=${HEADERS}    expected_status=${status}    params=${params}
+    Set Test Variable    ${RESPONSE}    ${response}
+
+I send a POST request to ${functionName} with ${urlPath}, payload ${payload} and expected status ${status}
+    ${HEADERS}=    Create Dictionary    Content-Type=application/json    Authorization=${ACCESS_TOKEN}
+    Create Session    host    ${host}
+    ${response}=    POST On Session    host    ${urlPath}    headers=${HEADERS}    json=${payload}    expected_status=${status}
+    Set Test Variable    ${RESPONSE}    ${response}
+
+I send a PUT request to ${functionName} with ${urlPath}, payload ${payload} and expected status ${status}
+    ${HEADERS}=    Create Dictionary    Content-Type=application/json    Authorization=${ACCESS_TOKEN}
+    Create Session    host    ${host}
+    ${response}=    PUT On Session    host    ${urlPath}    headers=${HEADERS}    json=${payload}    expected_status=${status}
+    Set Test Variable    ${RESPONSE}    ${response}
+    
