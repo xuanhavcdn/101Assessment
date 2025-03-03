@@ -82,7 +82,6 @@ The response should contain the merchant details
     Should Be Equal    ${actualNextInvoiceNumber}[0]    ${nextInvoiceNumber}
     Should Be Equal    ${actualMcc}[0]    ${mcc}
     Should Be Equal    ${actualMccName}[0]    ${mccName}
-
     Should Be Equal    ${actualLoyaltyEligible}    ${loyaltyEligible}
 
 
@@ -98,17 +97,6 @@ I send a GET request to retrieve all merchants expected status ${status} using $
     Create Session    host    ${host}
     ${response}=    GET On Session    host    ${merchantsPath}    headers=${HEADERS}    expected_status=${status}    params=${params}
     Set Test Variable    ${RESPONSE}    ${response}
-    # Key invalid page number
-    ${incorrectPageMessage}=    Set Variable    The pageNumber (${paramValue}) is invalid. The pageNumber must be less than or equal to.
-    Set Test Variable    ${incorrectPageMessage}
-    # # Convert response text to JSON
-    # ${json_response}    Convert String To JSON    ${response.text}
-    # # Extract the first element from "data" list
-    # ${merchant_data}    Get From List    ${json_response["data"]}    0
-    # # Get the "merchantId" from the extracted dictionary
-    # ${MERCHANT_ID}    Get From Dictionary    ${merchant_data}    merchantId
-    # # Set it as a test variable for future use
-    # Set Test Variable    ${MERCHANT_ID}
 
 I have invalid merchant id
     ${MERCHANT_ID}=    Generate Random String

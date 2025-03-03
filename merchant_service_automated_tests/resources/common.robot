@@ -3,10 +3,8 @@ Library    ExcelLibrary
 Library    Collections
 Library    RequestsLibrary
 Library    JSONLibrary
-
+Variables    ../variables/url.py
 *** Variables ***
-${apiTokenUrl}    https://api-101digital-sandbox.101digital.io/identity-service/1.0.0/token
-${host}    https://api-neobank-dev.101digital.io/merchant-service/1.0.0
 &{headers}    Content-Type=application/json    Accept=application/json
 ${excelFilePath}    merchant_service_automated_tests/test_data/test_data.xlsx 
 ${refreshTokenSheetName}    Refresh_Token

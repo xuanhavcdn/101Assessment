@@ -4,13 +4,14 @@ Library    RequestsLibrary
 Library    Collections
 Library    JSONLibrary
 Resource    ../resources/merchant_service_automated_test.robot
-
+Variables    ../variables/url.py
 
 *** Variables ***
 ${mmcNameParams}    SHOPPING & RETAIL
 ${mmcKey}    mccName
 ${pageNumberKey}    pageNumber
 ${pageNumberValue}    test123
+
 *** Test Cases ***
 Test case 01: Retrieve All Merchants Without Query Parameters
     [Documentation]    Verify retrieving all merchants without filters returns a 200 response with pagination metadata.
@@ -38,4 +39,4 @@ Test case 04: Retrieve All Merchants Using Invalid pageNumber
     Given I use an valid access token
     When I send a GET request to retrieve all merchants expected status 400 using ${pageNumberKey}: ${pageNumberValue}
     Then the response status code should be 400
-
+    And The response should contain "${incorrectPageTypeMessage}"
