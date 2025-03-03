@@ -4,7 +4,6 @@ Library    ExcelLibrary
 Library    Collections  
 Resource    common.robot
 Library    JSONLibrary
-Library    ../../.venv/lib/python3.11/site-packages/robot/libraries/String.py
 
 *** Variables ***
 ${createNewMerchantSheetName}    New_MerChant
@@ -79,7 +78,7 @@ The response should contain the merchant details
     Should Be Equal    ${actualLoyaltyEligible}    ${loyaltyEligible}
 
 I have invalid merchant id
-    ${MERCHANT_ID}=    Generate Random String
+    ${MERCHANT_ID}=    Set Variable    invalid_merchant_id
     ${invalidMerchantIdMessage}=    Set Variable    The merchantId (${MERCHANT_ID}) is invalid. The merchantId must be in the format UUID (8aec4498-46c4-495f-b817-2f30dff8420a).
     Set Test Variable    ${MERCHANT_ID}
     Set Test Variable    ${invalidMerchantIdMessage}
