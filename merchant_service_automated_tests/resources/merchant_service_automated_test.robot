@@ -48,16 +48,6 @@ I have a merchant payload with missing base currency
     I have a valid merchant payload
     Set To Dictionary    ${PAYLOAD}    baseCurrency=${EMPTY}
 
-I send a POST request to create a merchant with expected status ${status}
-    ${HEADERS}=    Create Dictionary    Content-Type=application/json    Authorization=${ACCESS_TOKEN}
-    Create Session    host    ${host}
-    ${response}=    POST On Session    host    ${merchantsPath}    headers=${HEADERS}    json=${PAYLOAD}    expected_status=${status}
-    Set Test Variable    ${RESPONSE}    ${response}
-    ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
-    ${merchantList}=    Get Value From Json    ${response_json}    $.data.merchantId
-    Run Keyword If    ${status} == 201
-    ...    Set Test Variable    ${MERCHANT_ID}    ${merchantList}[0]
-
 I have merchant id
     ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
     ${merchantList}=    Get Value From Json    ${response_json}    $.data.merchantId
@@ -88,13 +78,6 @@ The response should contain the merchant details
     Should Be Equal    ${actualMccName}[0]    ${mccName}
     Should Be Equal    ${actualLoyaltyEligible}    ${loyaltyEligible}
 
-I send a GET request to retrieve all merchants expected status ${status} using ${paramKey}: ${paramValue}
-    ${params}=    Create Dictionary    ${paramKey}=${paramValue}
-    ${HEADERS}=    Create Dictionary    Content-Type=application/json    Authorization=${ACCESS_TOKEN}
-    Create Session    host    ${host}
-    ${response}=    GET On Session    host    ${merchantsPath}    headers=${HEADERS}    expected_status=${status}    params=${params}
-    Set Test Variable    ${RESPONSE}    ${response}
-
 I have invalid merchant id
     ${MERCHANT_ID}=    Generate Random String
     ${invalidMerchantIdMessage}=    Set Variable    The merchantId (${MERCHANT_ID}) is invalid. The merchantId must be in the format UUID (8aec4498-46c4-495f-b817-2f30dff8420a).
@@ -118,3 +101,7 @@ The response should contain merchants with given ${paramKey}: ${paramValue}
     ${response_json}=    Evaluate    json.loads($RESPONSE.content)    json
     ${actualParamValue}=    Get Value From Json    ${response_json}    $.data[0].${paramKey}
     Should Contain    ${actualParamValue}    ${paramValue}
+
+I have customize params ${paramKey}: ${paramValue}
+    ${params}=    Create Dictionary    ${paramKey}=${paramValue}
+    Set Test Variable    ${PARAMS}    ${params}

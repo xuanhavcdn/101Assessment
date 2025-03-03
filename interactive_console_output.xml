@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.2.2 (Python 3.11.6 on darwin)" generated="2025-03-01T20:45:37.972150" rpa="false" schemaversion="5">
-<suite id="s1" name="Robot Interactive Console" source="/Users/hacao/.vscode/extensions/robocorp.robotframework-lsp-1.13.0/src/robotframework_ls/vendored/robotframework_interactive/robot_interactive_console.robot">
+<robot generator="Robot 7.2.2 (Python 3.11.6 on darwin)" generated="2025-03-03T21:47:01.997970" rpa="false" schemaversion="5">
+<suite id="s1" name="Robot Interactive Console" source="/Users/hacao/.cursor/extensions/robocorp.robotframework-lsp-1.13.0/src/robotframework_ls/vendored/robotframework_interactive/robot_interactive_console.robot">
 <test id="s1-t1" name="Default Task/Test" line="5">
 <kw name="Interpreter Main Loop" owner="MainLoop">
-<status status="PASS" start="2025-03-01T20:45:37.980612" elapsed="2.027925"/>
+<status status="PASS" start="2025-03-03T21:47:02.009742" elapsed="2.402788"/>
 </kw>
-<status status="PASS" start="2025-03-01T20:45:37.980391" elapsed="2.028385"/>
+<status status="PASS" start="2025-03-03T21:47:02.009425" elapsed="2.403248"/>
 </test>
-<status status="PASS" start="2025-03-01T20:45:37.972681" elapsed="2.036423"/>
+<status status="PASS" start="2025-03-03T21:47:01.998768" elapsed="2.414265"/>
 </suite>
 <statistics>
 <total>
@@ -20,6 +20,6 @@
 </suite>
 </statistics>
 <errors>
-<msg time="2025-03-01T20:45:37.970022" level="WARN">Error in file '/Users/hacao/.vscode/extensions/robocorp.robotframework-lsp-1.13.0/src/robotframework_ls/vendored/robotframework_interactive/robot_interactive_console.robot' on line 4: Singular section headers like '*** Test Case ***' are deprecated. Use plural format like '*** Test Cases ***' instead.</msg>
+<msg time="2025-03-03T21:47:01.995481" level="WARN">Error in file '/Users/hacao/.cursor/extensions/robocorp.robotframework-lsp-1.13.0/src/robotframework_ls/vendored/robotframework_interactive/robot_interactive_console.robot' on line 4: Singular section headers like '*** Test Case ***' are deprecated. Use plural format like '*** Test Cases ***' instead.</msg>
 </errors>
 </robot>
