@@ -1,4 +1,4 @@
-name: Robot Framework Tests
+name: Robot Framework Tests - API
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
           pip install robotframework-requests
           pip install robotframework-jsonlibrary
           pip install robotframework-seleniumlibrary
-          pip install robotframework-excellibrary
+          pip install robotframework-excellib
 
       - name: Run Robot Framework Tests
         run: |
