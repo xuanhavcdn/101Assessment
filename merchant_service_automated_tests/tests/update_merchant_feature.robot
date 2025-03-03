@@ -6,37 +6,37 @@ Library    JSONLibrary
 Resource    ../resources/merchant_service_automated_test.robot
 Variables    ../variables/url.py
 
-*** Variables ***
-${mmcNameParams}    SHOPPING & RETAIL
-${mmcKey}    mccName
-${pageNumberKey}    pageNumber
-${pageNumberValue}    test123
 
 *** Test Cases ***
-# Test case 01: Retrieve All Merchants Without Query Parameters
-#     [Documentation]    Verify retrieving all merchants without filters returns a 200 response with pagination metadata.
-#     Given I use an valid access token
-#     When I send a GET request to retrieve all merchants expected status 200 using '': ''
-#     Then the response status code should be 200
-#     And The response should contain a list of merchants with pagination
+Test case 01: Scenario: Update a merchant’s invoicePrefix and loyaltyEligible
+    Given I have a valid merchant payload
+    And I use a valid access token
+    And I send a POST request to "Create New Merchant" with ${merchantsPath}, payload ${PAYLOAD} and expected status 201
+    And I have merchant id
+    And I set request body with updated invoicePrefix and loyaltyEligible
+    When I send a PATCH request to "Update Merchant" with ${merchantsPath}/${MERCHANT_ID}, payload ${PAYLOAD} and expected status 200
+    Then The response status code should be 200
+    And The response should contain the merchant details
 
-# Test case 02: Retrieve All Merchants With Invalid Access Token
-#     [Documentation]    Verify that requesting merchants with an invalid access token returns 401 Unauthorized.
-#     Given I use an invalid access token
-#     When I send a GET request to retrieve all merchants expected status 401 using '': ''
-#     Then the response status code should be 401
-#     And The response should contain "Unauthorized"
+Test case 02: Scenario: Update merchant with an invalid access token
+    Given I have a valid merchant payload
+    And I use a valid access token
+    And I send a POST request to "Create New Merchant" with ${merchantsPath}, payload ${PAYLOAD} and expected status 201
+    And I have merchant id
+    And I set request body with updated invoicePrefix and loyaltyEligible
+    And I use an invalid access token
+    When I send a PATCH request to "Update Merchant" with ${merchantsPath}/${MERCHANT_ID}, payload ${PAYLOAD} and expected status 401
+    Then The response status code should be 401
+    And The response should contain "Unauthorized"
 
-# Test case 03: Retrieve All Merchants Using Valid mccName
-#     [Documentation]    Verify filtering merchants by valid mccName returns merchants with that category.
-#     Given I use an valid access token
-#     When I send a GET request to retrieve all merchants expected status 200 using ${mmcKey}: ${mmcNameParams}
-#     Then the response status code should be 200
-#     And The response should contain merchants with given ${mmcKey}: ${mmcNameParams}
+Test case 03: Scenario: Update merchant using an empty baseCurrency value
+    Given I have a valid merchant payload
+    And I use a valid access token
+    And I send a POST request to "Create New Merchant" with ${merchantsPath}, payload ${PAYLOAD} and expected status 201
+    And I have merchant id
+    And I set request body with an empty baseCurrency
+    When I send a PATCH request to "Update Merchant" with ${merchantsPath}/${MERCHANT_ID}, payload ${PAYLOAD} and expected status 400
+    Then The response status code should be 400
+    And The response should contain "${missingBaseCurrency}"
 
-# Test case 04: Retrieve All Merchants Using Invalid pageNumber
-#     [Documentation]    Verify that requesting merchants with an invalid pageNumber returns 400 Bad Request.
-#     Given I use an valid access token
-#     When I send a GET request to retrieve all merchants expected status 400 using ${pageNumberKey}: ${pageNumberValue}
-#     Then the response status code should be 400
-#     And The response should contain "${incorrectPageTypeMessage}"
+

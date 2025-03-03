@@ -105,3 +105,14 @@ The response should contain merchants with given ${paramKey}: ${paramValue}
 I have customize params ${paramKey}: ${paramValue}
     ${params}=    Create Dictionary    ${paramKey}=${paramValue}
     Set Test Variable    ${PARAMS}    ${params}
+
+I set request body with updated invoicePrefix and loyaltyEligible
+    &{BODY}=    Create Dictionary
+        ...    invoicePrefix=${invoicePrefix}
+        ...    loyaltyEligible=${loyaltyEligible}
+    Set Test Variable    ${PAYLOAD}    ${BODY}
+
+I set request body with an empty baseCurrency
+    &{BODY}=    Create Dictionary
+        ...    baseCurrency=${EMPTY}
+    Set Test Variable    ${PAYLOAD}    ${BODY}

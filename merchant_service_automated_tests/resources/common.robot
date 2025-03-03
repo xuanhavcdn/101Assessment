@@ -61,3 +61,8 @@ I send a PUT request to ${functionName} with ${urlPath}, payload ${payload} and 
     ${response}=    PUT On Session    host    ${urlPath}    headers=${HEADERS}    json=${payload}    expected_status=${status}
     Set Test Variable    ${RESPONSE}    ${response}
     
+I send a PATCH request to ${functionName} with ${urlPath}, payload ${payload} and expected status ${status}
+    ${HEADERS}=    Create Dictionary    Content-Type=application/json    Authorization=${ACCESS_TOKEN}
+    Create Session    host    ${host}
+    ${response}=    PATCH On Session    host    ${urlPath}    headers=${HEADERS}    json=${payload}    expected_status=${status}
+    Set Test Variable    ${RESPONSE}    ${response}
